@@ -1,16 +1,36 @@
-function changeLetter(letter){
-    console.log(letter)
-    if (toggle == true) {
-        letter.src = "images/helvetica/" + letter.id + ".png";
+function changeLetter(){
+    this.src = "images/deconstructed/" + this.id + ".png";
+}  
+
+function changeLetterback(){
+    this.src = "images/helvetica/" + this.id + ".png";
+    toggle = false;
+}
+
+function changeAll(){
+    if (toggle == false){
+        for (let j=0; j< letterCollection.length; j++){
+            let current = letterCollection[j];
+            current.src = "images/deconstructed/" + current.id + ".png";
+        }
     } else {
-        letter.src = "images/deconstructed/" + letter.id + ".png";
+        for (let l=0; l< letterCollection.length; l++){
+            let current = letterCollection[l];
+            current.src = "images/helvetica/" + current.id + ".png";
+        }
     }
-    toggle = !toggle;
+    toggle =!toggle;
 }
 
 
 /*main */
-const changeBtn = document.querySelector('.changeBtn');
+const changeBtn = document.querySelector('.btn');
 const letterCollection = document.querySelectorAll('.letter');
-letterCollection.forEach(letter => letter.addEventListener('click', (letter) => changeLetter(letter)));
+
+for (let i=0; i < letterCollection.length; i++){
+    letterCollection[i].addEventListener('mouseover', changeLetter);
+    letterCollection[i].addEventListener('mouseout' , changeLetterback);
+}
+
+changeBtn.addEventListener('click', changeAll);
 let toggle = false;
